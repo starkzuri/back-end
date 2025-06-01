@@ -9,7 +9,9 @@ edition = "2023_11"
 starknet = "2.8.2"
 
 [dev-dependencies]
-snforge_std = "0.31.0"
+# snforge_std = "0.31.0"
+snforge_std = "0.42.0"
+assert_macros = "2.11.4"
 
 
 [[target.starknet-contract]]

@@ -1,4 +1,4 @@
-mod erc20;
-mod interfaces;
-mod structs;
-mod starkzuri;
+pub mod erc20;
+pub mod interfaces;
+pub mod structs;
+pub mod starkzuri;

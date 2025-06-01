@@ -28,43 +28,43 @@ pub mod StarkZuri {
     #[storage]
     struct Storage {
        
-        deployer: ContractAddress,
-        version: u256,
-        users_count: u256,
-        posts_count: u256,
-        users: Map::<ContractAddress, User>,
-        posts: Map::<u256, Post>,
-        user_addresses: Map::<u256, ContractAddress>,
+        pub deployer: ContractAddress,
+        pub version: u256,
+        pub users_count: u256,
+        pub posts_count: u256,
+        pub users: Map::<ContractAddress, User>,
+        pub posts: Map::<u256, Post>,
+        pub user_addresses: Map::<u256, ContractAddress>,
         // followers and following profiles
-        followers: Map::<(ContractAddress, u8), ContractAddress>,
-        post_comments: Map::<(u256, u256), Comment>,
-        post_likes: Map::<(ContractAddress, u256), felt252>,
-        comment_count: u256,
+        pub followers: Map::<(ContractAddress, u8), ContractAddress>,
+        pub post_comments: Map::<(u256, u256), Comment>,
+        pub post_likes: Map::<(ContractAddress, u256), felt252>,
+        pub comment_count: u256,
 
         // communities
-        community_count: u256,
-        communities: Map::<u256, Community>,
+        pub community_count: u256,
+        pub communities: Map::<u256, Community>,
 
         // community_joins
         // a user can join more than one community
-        community_members: Map::<(u256, u256), User>,
+        pub community_members: Map::<(u256, u256), User>,
 
         // we are supposed to store notification based on the caller address
-        notifications: Map::<(ContractAddress, u256), Notification>,
+        pub notifications: Map::<(ContractAddress, u256), Notification>,
 
         // time to create a reel
-        reel_count: u256,
-        reels: Map::<u256, Reel>,
-        reel_likes: Map::<(ContractAddress, u256), felt252>,
-        reel_dislikes: Map::<(ContractAddress, u256), felt252>,
-        reel_comments: Map::<(u256, u256), Comment>,
+        pub reel_count: u256,
+        pub reels: Map::<u256, Reel>,
+        pub reel_likes: Map::<(ContractAddress, u256), felt252>,
+        pub reel_dislikes: Map::<(ContractAddress, u256), felt252>,
+        pub reel_comments: Map::<(u256, u256), Comment>,
 
         // now we need to claim the points so that they can appear on the profile
-        claimed_points: Map::<ContractAddress, u256>,
+        pub claimed_points: Map::<ContractAddress, u256>,
 
         // we are going to create a 
-        token_addresses: Map::<felt252, ContractAddress>,
-        balances: Map::<ContractAddress, u256>,
+        pub token_addresses: Map::<felt252, ContractAddress>,
+        pub balances: Map::<ContractAddress, u256>,
         // #[substorage(v0)]
         // pub ownable: OwnableComponent::Storage,
         
