@@ -122,11 +122,11 @@ pub mod StarkZuri {
 
         fn withdraw_zuri_points(ref self: ContractState, amount: u256){
             let caller = get_caller_address();
-            let total_amount = amount * 3100000000000;
+            let total_amount = amount * 64080000000000000;
             let token_dispatcher = IERC20Dispatcher { contract_address: contract_address_const::<
-                0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
             >()};
-            let balance = self.balances.read(contract_address_const::<0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7>());
+            let balance = self.balances.read(contract_address_const::<0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d>());
             assert(balance > total_amount, 'not enough eth in the vault');
             let mut user = self.users.read(caller);
             assert(user.zuri_points >= amount, 'insufficient points');
@@ -134,9 +134,9 @@ pub mod StarkZuri {
             let has_transferred = token_dispatcher.transfer(recipient: get_caller_address(), amount: total_amount);
             if has_transferred {
                 self.balances.write(contract_address_const::<
-                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                    0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                 >(), self.balances.read(contract_address_const::<
-                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                    0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                 >()) - total_amount);
                 self.users.write(caller, user);
             }
@@ -194,7 +194,7 @@ pub mod StarkZuri {
         fn deposit_fee(ref self: ContractState, receiver: ContractAddress){
             let eth_dispatcher = IERC20Dispatcher {
                 contract_address: contract_address_const::<
-                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                    0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                 >() // ETH Contract Address            
             };
 
@@ -344,9 +344,10 @@ pub mod StarkZuri {
 
             let eth_address: ContractAddress = self.token_addresses.read('ETH');
                 let token_dispatcher = IERC20Dispatcher {contract_address: contract_address_const::<
-                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                    0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                 >()};
-                let amount = 31000000000000;
+                
+                let amount = 71200000000000000;
                 let has_transferred = token_dispatcher.transferFrom(get_caller_address(), get_contract_address(), amount);
 
                 
@@ -354,7 +355,7 @@ pub mod StarkZuri {
             if (likable_post != 'like' && has_transferred) {
                 let mut post = self.posts.read(post_id);
                 post.likes += 1;
-                post.zuri_points += 10;
+                post.zuri_points += 1;
                 
                 let liker: User = self.users.read(get_caller_address());
                 let mut user: User = self.users.read(post.caller);
@@ -374,8 +375,8 @@ pub mod StarkZuri {
                 self.users.write(post.caller, user);
                 self.posts.write(post_id, post);
                 self.post_likes.write((get_caller_address(), post_id), 'like');
-                self.balances.write(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
-                    >(), self.balances.read(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                self.balances.write(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
+                    >(), self.balances.read(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                         >()) + amount);
             }
     
@@ -442,10 +443,10 @@ pub mod StarkZuri {
 
             
             let token_dispatcher = IERC20Dispatcher {contract_address: contract_address_const::<
-                0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
             >()};
 
-            let amount = 5900000000000;
+            let amount = 142400000000000000;
             let has_transferred = token_dispatcher.transferFrom(get_caller_address(), get_contract_address(), amount);
             
             let notification: Notification  =  Notification{
@@ -469,8 +470,8 @@ pub mod StarkZuri {
                 
 
                 self.post_comments.write((post_id, post.comments), comment);
-                self.balances.write(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
-                    >(), self.balances.read(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                self.balances.write(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
+                    >(), self.balances.read(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                         >()) + amount);
 
             }
@@ -624,9 +625,9 @@ pub mod StarkZuri {
             // let mut community_owner = self.users.read(community_to_be_joined.community_admin)
 
             let token_dispatcher = IERC20Dispatcher {contract_address: contract_address_const::<
-                0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
             >()};
-            let amount = 31000000000000;
+            let amount = 71200000000000000;
             let has_transferred = token_dispatcher.transferFrom(get_caller_address(), get_contract_address(), amount);
 
             if self.member_exist(community_id, user_joining) == false && has_transferred {
@@ -634,8 +635,8 @@ pub mod StarkZuri {
                 community_to_be_joined.members = _members;
                 self.community_members.write((_members, community_id), _user);
                 self.communities.write(community_id, community_to_be_joined);
-                self.balances.write(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
-                    >(), self.balances.read(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                self.balances.write(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
+                    >(), self.balances.read(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                         >()) + amount);
             }
             
@@ -804,9 +805,9 @@ pub mod StarkZuri {
 
                 // reel fee goes here
                 let token_dispatcher = IERC20Dispatcher {contract_address: contract_address_const::<
-                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                    0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                 >()};
-                let amount = 31000000000000;
+                let amount = 71200000000000000;
                 let has_transferred = token_dispatcher.transferFrom(get_caller_address(), get_contract_address(), amount);
 
                 if has_transferred {
@@ -817,8 +818,8 @@ pub mod StarkZuri {
                 self.users.write(reel.caller, _user);
                 self.reels.write(reel_id, reel);
                 self.reel_likes.write((get_caller_address(), reel_id), 'like');
-                self.balances.write(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
-                    >(), self.balances.read(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                self.balances.write(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
+                    >(), self.balances.read(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                         >()) + amount);
 
                 }
@@ -845,7 +846,7 @@ pub mod StarkZuri {
                     timestamp: get_block_timestamp(),
                 };
                 let token_dispatcher = IERC20Dispatcher {contract_address: contract_address_const::<
-                    0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                    0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                 >()};
                 let amount = 14000000000000;
                 let has_transferred = token_dispatcher.transferFrom(get_caller_address(), get_contract_address(), amount);
@@ -860,8 +861,8 @@ pub mod StarkZuri {
                 self.users.write(reel.caller, _user);
                 self.reels.write(reel_id, reel);
                 self.reel_dislikes.write((get_caller_address(), reel_id), 'dislike');
-                self.balances.write(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
-                    >(), self.balances.read(contract_address_const::< 0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+                self.balances.write(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
+                    >(), self.balances.read(contract_address_const::< 0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
                         >()) + amount);
 
                 }
@@ -907,10 +908,10 @@ pub mod StarkZuri {
 
          
         let token_dispatcher = IERC20Dispatcher {contract_address: contract_address_const::<
-            0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+            0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
         >()};
 
-        let amount = 5900000000000;
+        let amount = 142400000000000000;
         let has_transferred = token_dispatcher.transferFrom(get_caller_address(), get_contract_address(), amount);
 
         if (has_transferred) {
@@ -968,9 +969,9 @@ pub mod StarkZuri {
         };
 
         let token_dispatcher = IERC20Dispatcher {contract_address: contract_address_const::<
-            0x049d36570d4e46f48e99674bd3fcc84644ddd6b96f7c741b1562b82f9e004dc7
+            0x04718f5a0fc34cc1af16a1cdee98ffb20c31f5cd61d6ab07201858f4287c938d
         >()};
-        let amount = 31000000000000;
+        let amount = 71200000000000000;
         let has_transferred = token_dispatcher.transferFrom(get_caller_address(), get_contract_address(), amount);
 
         if (has_transferred) {
